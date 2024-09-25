@@ -12,12 +12,12 @@ This workshop will focus on the Hugging Face ecosystem (https://huggingface.co/d
 
 
 📝 **Preparation Checklist:**
-Before attending the workshop, please ensure you:
-- Follow the installation instructions provided to set up the necessary software and dependencies.  
-- Generate API keys for accessing LLMs via platforms like Hugging Face.
+Before attending the workshop, please ensure you follow the **[installation instructions](https://github.com/FennStatistics/introductory-workshop-in-LLMs/tree/main/Preparation%20Checklist)** provided to
+- set up the necessary software and dependencies.  
+- generate API keys for accessing LLMs via platforms like Hugging Face.
 
 📢 **Important Note:** 
-In this three-hour workshop, we’ll only have time to cover the basics of LLMs. This is a complex and rapidly evolving field, so it’s essential that you as a participant come with a basic understanding of Python. Additionally, I highly recommend reviewing the **Additional Resources** section prior to the workshop for a more comprehensive overview. That said, I hope you’re excited to join us for some hands-on learning, where we’ll explore practical and impactful use cases of LLMs (see section below).
+In this three-hour workshop, we’ll only have time to cover the basics of LLMs. This is a complex and rapidly evolving field, so it’s essential that you as a participant come with a basic understanding of Python. Additionally, I highly recommend reviewing the **[Additional Resources](https://github.com/FennStatistics/introductory-workshop-in-LLMs/tree/main/Additional%20Resources)** section prior to the workshop for a more comprehensive overview. That said, I hope you’re excited to join us for some hands-on learning, where we’ll explore practical and impactful use cases of LLMs (see section below).
 
 💬 **Questions?**  
 I’m here to help! If you have any questions, suggestions or would like to discuss potential ideas, feel free to reach out: julius.fenn@psychologie.uni-freiburg.de
