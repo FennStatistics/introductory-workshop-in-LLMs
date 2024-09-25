@@ -38,7 +38,7 @@
 * White, J., Fu, Q., Hays, S., Sandborn, M., Olea, C., Gilbert, H., Elnashar, A., Spencer-Smith, J., & Schmidt, D. C. (2023). A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT (arXiv:2302.11382). arXiv. https://doi.org/10.48550/arXiv.2302.11382
 
 
-# X-shot learning
+### X-shot learning
 
 , whereby is is equal to "zero", "one", "few"
 
