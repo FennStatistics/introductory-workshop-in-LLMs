@@ -21,6 +21,12 @@
 * Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., Zhang, C., Agarwal, S., Slama, K., Ray, A., Schulman, J., Hilton, J., Kelton, F., Miller, L., Simens, M., Askell, A., Welinder, P., Christiano, P., Leike, J., & Lowe, R. (2022). Training language models to follow instructions with human feedback (arXiv:2203.02155). arXiv. https://doi.org/10.48550/arXiv.2203.02155
 
 
+### Videos, Podcasts
+
+* playlist on basics of neural networks and GPT: https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
+* videos about machine learning research papers, programming, and issues of the AI community, and the broader impact of AI in society by Yannic Kilcher: https://www.youtube.com/@YannicKilcher
+* top technical AI podcast on Spotify: https://www.youtube.com/c/machinelearningstreettalk
+
 
 ## prompting
 
