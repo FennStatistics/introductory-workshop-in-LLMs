@@ -8,7 +8,7 @@ Our aim is twofold:
 2. Provide practical, hands-on code templates (in Python) that will enable you to apply LLMs effectively in your research.
 
 ⚙️ **Technologies Used:**  
-This workshop will focus on the Hugging Face ecosystem (https://huggingface.co/docs/hub/index) to apply various LLMs. The majority of the code will be executed in **Jupyter Notebooks**, using Python and essential libraries such as `transformers`, `torch`, and `scikit-learn` (many more). The focus will be on integrating LLMs into a variety of NLP tasks.
+This workshop will focus on the Hugging Face ecosystem (https://huggingface.co/docs/hub/index) to apply various LLMs. The majority of the code will be executed in **Jupyter Notebooks**, using Python and essential libraries such as `transformers`, `torch`, and `scikit-learn` (some more). The focus will be on integrating LLMs into a variety of NLP tasks.
 
 
 📝 **Preparation Checklist:**
