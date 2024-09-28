@@ -1,0 +1,9 @@
+# avoid uploading sensitive information
+**/api_key.py
+**/__pycache__/
+
+# Distribution / packaging
+.Python
+
+# avvoid uploading templates
+**/templates/
