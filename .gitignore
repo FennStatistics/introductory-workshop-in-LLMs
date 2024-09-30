@@ -7,3 +7,5 @@
 
 # avvoid uploading templates
 **/templates/
+# avoid uploading literature
+**/literature (internal)/
