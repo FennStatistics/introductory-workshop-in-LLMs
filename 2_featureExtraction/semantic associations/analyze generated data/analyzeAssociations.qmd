@@ -35,7 +35,7 @@ p_load('xlsx', 'associatoR', 'DT', 'igraph')
 
 # load data
 setwd("../generated data")
-associationData <- xlsx::read.xlsx2(file = "word_associations.xlsx", sheetIndex = 1)
+associationData <- xlsx::read.xlsx2(file = "word_associations_translated.xlsx", sheetIndex = 1) # "word_associations.xlsx"
 ```
 
 
@@ -55,7 +55,7 @@ DT::datatable(data = associationData)
 
 
 ```{r}
-tmp <- associationData[associationData$cue == "muskulös", ]
+tmp <- associationData[associationData$cue == "muscular", ]
 
 word_frequencies <- table(tmp$response)
 word_frequencies_df <- as.data.frame(word_frequencies)
@@ -71,24 +71,7 @@ wordcloud(words = word_frequencies_df$Var1,
 ```
 
 ```{r}
-tmp <- associationData[associationData$cue == "normalgewichtig", ]
-
-word_frequencies <- table(tmp$response)
-word_frequencies_df <- as.data.frame(word_frequencies)
-
-library(wordcloud)
-# Create the word cloud
-wordcloud(words = word_frequencies_df$Var1, 
-          freq = word_frequencies_df$Freq, 
-          min.freq = 1, 
-          max.words = 100, 
-          random.order = FALSE, 
-          colors = brewer.pal(8, "Dark2"))
-```
-
-
-```{r}
-tmp <- associationData[associationData$cue == "übergewichtig", ]
+tmp <- associationData[associationData$cue == "normal weight", ]
 
 word_frequencies <- table(tmp$response)
 word_frequencies_df <- as.data.frame(word_frequencies)
@@ -105,7 +88,24 @@ wordcloud(words = word_frequencies_df$Var1,
 
 
 ```{r}
-tmp <- associationData[associationData$cue == "untergewichtig", ]
+tmp <- associationData[associationData$cue == "overweight", ]
+
+word_frequencies <- table(tmp$response)
+word_frequencies_df <- as.data.frame(word_frequencies)
+
+library(wordcloud)
+# Create the word cloud
+wordcloud(words = word_frequencies_df$Var1, 
+          freq = word_frequencies_df$Freq, 
+          min.freq = 1, 
+          max.words = 100, 
+          random.order = FALSE, 
+          colors = brewer.pal(8, "Dark2"))
+```
+
+
+```{r}
+tmp <- associationData[associationData$cue == "underweight", ]
 
 word_frequencies <- table(tmp$response)
 word_frequencies_df <- as.data.frame(word_frequencies)
@@ -125,7 +125,7 @@ wordcloud(words = word_frequencies_df$Var1,
 # get semantic networks
 
 ```{r}
-tmp <- associationData[associationData$cue == "übergewichtig", ]
+tmp <- associationData[associationData$cue == "overweight", ]
 tmp$response[tmp$participant_id == unique(tmp$participant_id)[1]]
 
 tmp[c("participant_id", "response")]
@@ -201,7 +201,7 @@ plot(g,
 
 sort(table(tmp$response))
 mat <- as.matrix(as_adjacency_matrix(g))
-mat[rowSums(mat) >= 10, colSums(mat) >= 10]
+mat[rowSums(mat) >= 5, colSums(mat) >= 5]
 ```
 
 
