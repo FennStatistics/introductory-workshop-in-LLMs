@@ -9,3 +9,5 @@
 **/templates/
 # avoid uploading literature
 **/literature (internal)/
+# avoid uploading meta data of the rpubs server
+**/rsconnect/
