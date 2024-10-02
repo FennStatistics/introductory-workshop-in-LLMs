@@ -30,201 +30,229 @@ format:
 
 # load packages
 require(pacman)
-p_load('xlsx', 'associatoR', 'DT', 'igraph')
+p_load('xlsx', '', 'DT', 'igraph', 'tidyverse', 'wordcloud')
 
 
 # load data
 setwd("../generated data")
-associationData <- xlsx::read.xlsx2(file = "word_associations_translated.xlsx", sheetIndex = 1) # "word_associations.xlsx"
+
+# for first order associations example
+associationData_firstOrder <- xlsx::read.xlsx2(file = "word_associations_firstOrder_adjectives.xlsx", sheetIndex = 1)
+
+## adjust ID variable
+associationData_firstOrder$participant_id <- str_extract(string = associationData_firstOrder$participant_id, pattern = "[:alpha:]*_[:digit:]*")
 ```
 
 
 
+# first order associations
+
+## describe data
 
 ```{r}
-table(associationData$cue)
-
-
-dim(associationData)
-
-DT::datatable(data = associationData)
+dim(associationData_firstOrder)
+table(associationData_firstOrder$cue)
+length(unique(associationData_firstOrder$participant_id))
 ```
 
-
-# get wordclouds
-
+dynamic data table:
 
 ```{r}
-tmp <- associationData[associationData$cue == "muscular", ]
-
-word_frequencies <- table(tmp$response)
-word_frequencies_df <- as.data.frame(word_frequencies)
-
-library(wordcloud)
-# Create the word cloud
-wordcloud(words = word_frequencies_df$Var1, 
-          freq = word_frequencies_df$Freq, 
-          min.freq = 1, 
-          max.words = 100, 
-          random.order = FALSE, 
-          colors = brewer.pal(8, "Dark2"))
+DT::datatable(data = associationData_firstOrder)
 ```
 
-```{r}
-tmp <- associationData[associationData$cue == "normal weight", ]
+## analyze data
 
-word_frequencies <- table(tmp$response)
-word_frequencies_df <- as.data.frame(word_frequencies)
+### get word clouds
 
-library(wordcloud)
-# Create the word cloud
-wordcloud(words = word_frequencies_df$Var1, 
-          freq = word_frequencies_df$Freq, 
-          min.freq = 1, 
-          max.words = 100, 
-          random.order = FALSE, 
-          colors = brewer.pal(8, "Dark2"))
-```
 
+function to create word clouds: 
 
 ```{r}
-tmp <- associationData[associationData$cue == "overweight", ]
-
-word_frequencies <- table(tmp$response)
-word_frequencies_df <- as.data.frame(word_frequencies)
-
-library(wordcloud)
-# Create the word cloud
-wordcloud(words = word_frequencies_df$Var1, 
-          freq = word_frequencies_df$Freq, 
-          min.freq = 1, 
-          max.words = 100, 
-          random.order = FALSE, 
-          colors = brewer.pal(8, "Dark2"))
-```
-
-
-```{r}
-tmp <- associationData[associationData$cue == "underweight", ]
-
-word_frequencies <- table(tmp$response)
-word_frequencies_df <- as.data.frame(word_frequencies)
-
-library(wordcloud)
-# Create the word cloud
-wordcloud(words = word_frequencies_df$Var1, 
-          freq = word_frequencies_df$Freq, 
-          min.freq = 1, 
-          max.words = 100, 
-          random.order = FALSE, 
-          colors = brewer.pal(8, "Dark2"))
-```
-
-
-
-# get semantic networks
-
-```{r}
-tmp <- associationData[associationData$cue == "overweight", ]
-tmp$response[tmp$participant_id == unique(tmp$participant_id)[1]]
-
-tmp[c("participant_id", "response")]
-```
-
-
-```{r}
-# Group responses by participant
-library(dplyr)
-
-grouped_responses <- tmp %>%
-  group_by(participant_id) %>%
-  summarise(associations = list(response)) %>%
-  ungroup()
-
-
-
-# Function to create edges from the grouped responses
-create_edges <- function(association, distance = 2) {
-  edges <- data.frame()
-  n <- length(association)
+generate_wordcloud <- function(cue_word, data_set) {
   
-  for (i in 1:n) {
-    for (d in 1:distance) {
-      if (i + d <= n) {
-        edges <- rbind(edges, data.frame(from = association[i], to = association[i + d]))
+  # Filter the data set for the given cue word
+  tmp <- data_set[data_set$cue == cue_word, ]
+  
+  # Calculate word frequencies
+  word_frequencies <- table(tmp$response)
+  word_frequencies_df <- as.data.frame(word_frequencies)
+  
+  # Create the word cloud
+  wordcloud(words = word_frequencies_df$Var1, 
+            freq = word_frequencies_df$Freq, 
+            min.freq = 1, 
+            max.words = 100, 
+            random.order = FALSE, 
+            colors = brewer.pal(8, "Dark2"))
+}
+```
+
+
+
+```{r}
+generate_wordcloud("muskulös", associationData_firstOrder)
+```
+
+```{r}
+generate_wordcloud("normalgewichtig", associationData_firstOrder)
+```
+
+
+```{r}
+generate_wordcloud("übergewichtig", associationData_firstOrder)
+```
+
+
+```{r}
+generate_wordcloud("untergewichtig", associationData_firstOrder)
+```
+
+
+### get semantic networks
+
+The idea of Network Inference from Fluency Data is motivated by two articles:
+
+* Wulff, D. U., Hills, T. T., & Mata, R. (2022). Structural differences in the semantic networks of younger and older adults. Scientific Reports, 12(1), Article 1. https://doi.org/10.1038/s41598-022-11698-4
+* Goñi, J., Arrondo, G., Sepulcre, J., Martincorena, I., Vélez de Mendizábal, N., Corominas-Murtra, B., Bejarano, B., Ardanza-Trevijano, S., Peraita, H., Wall, D. P., & Villoslada, P. (2011). The semantic organization of the animal category: Evidence from semantic verbal fluency and network theory. Cognitive Processing, 12(2), 183–196. https://doi.org/10.1007/s10339-010-0372-x
+
+
+
+function to create semantic networks (! without checking if all the edges are "true", appear more frequently than expected randomly): 
+
+```{r}
+  # Function to create edges from the grouped responses
+  create_edges <- function(association, distance = 2) {
+    edges <- data.frame()
+    n <- length(association)
+    
+    for (i in 1:n) {
+      for (d in 1:distance) {
+        if (i + d <= n) {
+          edges <- rbind(edges, data.frame(from = association[i], to = association[i + d]))
+        }
       }
     }
+    return(edges)
   }
-  return(edges)
-}
 
-# Apply the function to create edges for each participant
-all_edges <- do.call(rbind, lapply(grouped_responses$associations, create_edges))
-
-# Calculate word frequencies across the entire dataset
-word_frequencies <- tmp %>%
-  count(response, name = "frequency")
-
-# Calculate the edge weights (how often each link appears between two words)
-edge_weights <- all_edges %>%
-  group_by(from, to) %>%
-  summarise(weight = n(), .groups = "drop")
-
-# Create the graph from the edge list with edge weights
-g <- graph_from_data_frame(edge_weights, directed = FALSE)
-
-# Get the list of unique words in the graph (vertices)
-vertices <- V(g)$name
-
-# Map word frequencies to vertex sizes
-vertex_sizes <- sapply(vertices, function(word) {
-  freq <- word_frequencies %>%
-    filter(response == word) %>%
-    pull(frequency)
+generate_association_network <- function(cue_word, data_set, distance = 2) {
+  # Filter the dataset based on the cue word
+  tmp <- data_set[data_set$cue == cue_word, ]
   
-  if(length(freq) == 0) {
-    return(1)  # Default size if the word is not found (shouldn't happen)
-  } else {
-    return(freq)
-  }
-})
+  # print number of times a response was given:
+  print("number of times a response was given")
+  print(sort(table(tmp$response)))
+  
+  grouped_responses <- tmp %>%
+    group_by(participant_id) %>%
+    summarise(associations = list(response)) %>%
+    ungroup()
+  
+  # Apply the function to create edges for each participant
+  all_edges <- do.call(rbind, lapply(grouped_responses$associations, create_edges, distance = distance))
+  
+  # Calculate word frequencies across the entire data set
+  word_frequencies <- tmp %>%
+    count(response, name = "frequency")
+  
+  # Calculate the edge weights (how often each link appears between two words)
+  edge_weights <- all_edges %>%
+    group_by(from, to) %>%
+    summarise(weight = n(), .groups = "drop")
+  
+  # Create the graph from the edge list with edge weights
+  g <- graph_from_data_frame(edge_weights, directed = FALSE)
+  
+  # Get the list of unique words in the graph (vertices)
+  vertices <- V(g)$name
+  
+  # Extract edge weights to adjust the edge widths
+  edge_widths <- E(g)$weight
+  
+  # Map word frequencies to vertex sizes
+  vertex_sizes <- sapply(vertices, function(word) {
+    freq <- word_frequencies %>%
+      filter(response == word) %>%
+      pull(frequency)
+    
 
-# Extract edge weights to adjust the edge widths
-edge_widths <- E(g)$weight
-
-# Plot the network with vertex sizes proportional to word frequencies and edge widths proportional to edge weights
-plot(g, 
-     vertex.label.color = "black", 
-     vertex.size = vertex_sizes * 2,           # Scale vertex sizes by word frequency
-     edge.width = edge_widths * 1,             # Scale edge widths by weight (number of links)
-     edge.arrow.size = 0.5)
-
-sort(table(tmp$response))
-mat <- as.matrix(as_adjacency_matrix(g))
-mat[rowSums(mat) >= 5, colSums(mat) >= 5]
+    if(length(freq) == 0) {
+      return(1)  # Default size if the word is not found (shouldn't happen)
+    } else {
+      return(freq)
+    }
+  })
+  
+  # Plot the network with vertex sizes proportional to word frequencies and edge widths proportional to edge weights
+  plot(g, 
+       vertex.label.color = "black", 
+       vertex.size = vertex_sizes * 1.5,           # Scale vertex sizes by word frequency
+       edge.width = edge_widths * 1,             # Scale edge widths by weight (number of links)
+       edge.arrow.size = 0.5)
+  
+  # Return the igraph object
+  return(g)
+}
 ```
 
 
 
 
 
+```{r}
+tmp_g <- generate_association_network("muskulös", associationData_firstOrder, distance = 2)
+
+mat <- as.matrix(as_adjacency_matrix(tmp_g, attr = "weight"))
+
+define_threshold <- 10
+mat[apply(mat, 1, function(row) any(row >= define_threshold)), apply(mat, 2, function(row) any(row >= define_threshold))]
+```
+
+
+```{r}
+tmp_g <- generate_association_network("normalgewichtig", associationData_firstOrder, distance = 2)
+
+mat <- as.matrix(as_adjacency_matrix(tmp_g, attr = "weight"))
+
+define_threshold <- 10
+mat[apply(mat, 1, function(row) any(row >= define_threshold)), apply(mat, 2, function(row) any(row >= define_threshold))]
+```
+
+
+```{r}
+tmp_g <- generate_association_network("übergewichtig", associationData_firstOrder, distance = 2)
+
+mat <- as.matrix(as_adjacency_matrix(tmp_g, attr = "weight"))
+
+define_threshold <- 6
+mat[apply(mat, 1, function(row) any(row >= define_threshold)), apply(mat, 2, function(row) any(row >= define_threshold))]
+```
+
+
+```{r}
+tmp_g <- generate_association_network("untergewichtig", associationData_firstOrder, distance = 2)
+
+mat <- as.matrix(as_adjacency_matrix(tmp_g, attr = "weight"))
+
+define_threshold <- 6
+mat[apply(mat, 1, function(row) any(row >= define_threshold)), apply(mat, 2, function(row) any(row >= define_threshold))]
+```
 
 
 
 
 
-## OLD
+# second order associations (not shown)
 
-
-
-
+just some random code from the associatoR package
 
 
 ```{r}
 #| eval: false
 
 
-ar_obj <- ar_import(associationData,
+ar_obj <- ar_import(associationData_firstOrder,
           participant = participant_id,
           cue = cue,
           response = response,
@@ -266,17 +294,12 @@ ar_plot_wordcloud(
   color_by = cues,
   top_n = 20
 )
-```
 
 
 
 
-
-```{r}
-#| eval: false
-
-# Importing the associationData data
-ar_obj <- ar_import(data = associationData,
+# Importing the associationData_firstOrder data
+ar_obj <- ar_import(data = associationData_firstOrder,
                     participant = participant_id,
                     cue = cue,
                     response = response,
@@ -289,10 +312,10 @@ ar_obj <- ar_import(data = associationData,
 
 # export wordlist
 # associatoR::ar_wordlist_export(ar_obj,
-#                    file = "outputs/associationData_wordlist.xlsx")
+#                    file = "outputs/associationData_firstOrder_wordlist.xlsx")
 # import wordlist
 # ar_obj <- associatoR::ar_wordlist_import(ar_obj,
-#                              file = "associationData_wordlist.csv",
+#                              file = "associationData_firstOrder_wordlist.csv",
 #                              process_cues = TRUE,
 #                              na = c("NA"))
 
@@ -352,7 +375,7 @@ table(ar_obj$targets$cluster)
 #   proportion_labels = 1
 # )
 
-ar_import(associationData,
+ar_import(associationData_firstOrder,
           participant = participant_id,
           cue = cue,
           response = response,
@@ -399,7 +422,7 @@ ar_compare_embeddings(ar_obj,
                       intersection = "pair")
 
 
-ar_import(associationData,
+ar_import(associationData_firstOrder,
           participant = participant_id,
           cue = cue,
           response = response,
