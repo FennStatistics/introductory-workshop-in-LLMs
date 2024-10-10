@@ -13,6 +13,15 @@
 **/rsconnect/
 
 
+
+### 4 summarize literature
 # local supabase server
 **/.branches
 **/.temp/
+
+# do not upload any local DBs
+**/DB_Chroma
+
+# do not upload any scientific PDFs
+**/PDFs/*.pdf
+**/PDFs/AIregulation/
