@@ -11,3 +11,8 @@
 **/literature (internal)/
 # avoid uploading meta data of the rpubs server
 **/rsconnect/
+
+
+# local supabase server
+**/.branches
+**/.temp/
