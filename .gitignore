@@ -25,3 +25,4 @@
 # do not upload any scientific PDFs
 **/PDFs/*.pdf
 **/PDFs/AIregulation/
+**/tmp_downloads/

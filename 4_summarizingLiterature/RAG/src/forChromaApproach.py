@@ -141,7 +141,7 @@ def retrieveGenerate(query_text, prompt_template, openAI_key, chroma_path, docsR
         
         prompt_template_instance = ChatPromptTemplate.from_template(prompt_template)
         prompt = prompt_template_instance.format(context=context_text, question=query_text)
-        # print("Query:", prompt, "\n\n")
+        print("Query:", prompt, "\n\n")
 
         model = ChatOpenAI(api_key=openAI_key, temperature=0.3)
         response_text = model.predict(prompt)
