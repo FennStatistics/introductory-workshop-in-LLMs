@@ -98,7 +98,7 @@ def load_split_embed(supabase_DB, path_to_PDFs, args_Split, LMM):
     chunk_overlap = args_Split.get('chunk_overlap')
     
     arrayPDFs = non_processed_PDFs(supabase_DB=supabase_DB, verbose=False)
-    arrayPDFs = arrayPDFs[:3] # !!!!
+    arrayPDFs = arrayPDFs[:2] # !!!!
     # download all PDFs, which have not been processed
     for pdf in arrayPDFs:
         download_PDF(folderpath=path_to_PDFs, filename=pdf, supabase_DB=supabase_DB)
