@@ -12,6 +12,22 @@ If you’d like to follow along with the code demonstrations, having a basic und
 
 > During the session, we’ll dive into hands-on learning, highlighting practical and impactful uses of LLMs. I look forward to exploring these applications with you!
 
+
+
+---
+
+## 2. 📝 Setting up your Hugging Face Inference API and Llama Models
+
+The Inference API of Hugging Face offers access to models with significant community interest and widespread use. For a list of supported models, refer to [Hugging Face Supported Models](https://huggingface.co/docs/api-inference/supported-models).
+
+**Precondition**: Create an Access Token by visiting [Hugging Face Tokens](https://huggingface.co/settings/tokens) and (if desired) set up a Pro account to use larger language models, such as Llama-3-70B. Additionally, you must accept the META LLAMA 3 COMMUNITY LICENSE AGREEMENT to use these models, see:
+
+- [meta-llama/Llama-3.1-8B-Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct)
+- [meta-llama/Meta-Llama-3-70B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-70B-Instruct)
+
+> **Remark**: Llama models operate under the **META LLAMA 3 COMMUNITY LICENSE AGREEMENT**, which grants a non-exclusive, royalty-free license for users to utilize, modify, and distribute the Llama 3 materials. This license includes requirements for attribution and naming conventions in derivative works. Note that users with over 700 million monthly active users must obtain a separate license. Meta disclaims all warranties and limits liability for the materials’ use.
+
+
 ---
 
 ## 2. 🔧 Software Setup (If Desired)
