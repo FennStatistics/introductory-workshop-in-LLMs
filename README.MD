@@ -24,18 +24,27 @@ I’m here to help! If you have any questions, suggestions or would like to disc
 
 ## Application Cases Covered in the Workshop:
 
-1. **Text Generation**  
-   - Learn how to generate coherent and creative text using pre-trained LLMs.  
-   - Experiment with various **prompting techniques** and explore the impact of **hyperparameters** (e.g., temperature, top-k sampling) on output diversity and creativity.
+1. **Fundamentals**  
+   - Learn **different ways to call LLMs** by using an API, download the LLM weights and rum them locally and us a web-based interface.
+   - Experiment with various **prompting techniques** and their effect on the generated outputs.
+   - Explore the impact of **hyperparameters** (e.g., temperature, top-k sampling) on output diversity and creativity.
 
-2. **Feature Extraction**  
-   - Extract **embeddings** (numerical representations of text meaning) using LLMs and apply them for tasks such as text similarity analysis using cosine similarity.  
-   - Explore how embeddings can represent semantic meaning and facilitate other downstream tasks.
+2. **Text Generation**  
+   - Learn how to **generate coherent and creative texts** using pre-trained LLMs; use-case: idea generation machine for technologies.
 
-3. **Text Classification**  
+3. **Feature Extraction, Synthetic Data**  
+   - *Encoder model*: extract **embeddings** (numerical representations of text meaning) using LLMs and apply them for tasks such as text similarity analysis using cosine similarity.  
+      + Explore how embeddings can represent semantic meaning and facilitate other downstream tasks.
+   - *Decoder model*: Apply embeddings to generate synthetic data; use-case: semantic associations (mimic a "Cognitive-Affective Map")
+   
+4. **Text Classification**  
    - Use extracted embeddings to perform **text classification** with machine learning models like regularized regression or random forests.  
-   - Alternatively, explore **fine-tuning LLMs** to classify text (sometimes) more accurately for specific domains.
+   - Alternatively, explore **fine-tuning LLMs** to classify text (sometimes) more accurately for specific tasks (see Appendix).
 
-4. **Summarizing Literature**  
+5. **Summarizing Literature**  
    - Apply LLMs for **summarizing scientific articles** using advanced techniques like **Retrieval-Augmented Generation (RAG)**, which combines LLMs with retrieval mechanisms.  
-   - Enhance your summarization by coupling it with **bibliometric analysis** to better understand academic research trends.
+      + Enhance your summarization by coupling it with **bibliometric analysis** to better understand academic research trends.
+
+6. **Appendix**
+   - Discover advanced functionalities like **Text-to-Speech** and **Speech-to-Text** for converting text to audio and vice sersa.
+   - Explore **model fine-tuning techniques** to tailor LLMs for specialized applications and improved performance in specific tasks.
