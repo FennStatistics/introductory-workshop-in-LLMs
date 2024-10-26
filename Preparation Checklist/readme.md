@@ -6,7 +6,7 @@ To get the most out of our workshop on Large Language Models, please complete th
 
 ## 1. 📖 Read in Advance
 
-📢 **Important Note**: This workshop will cover the fundamentals of Large Language Models (LLMs) in a condensed, three-hour format. To deepen your understanding, please review the **Additional Resources** and explore some introductory materials before the workshop.
+📢 **Important Note**: This workshop will cover the fundamentals of Large Language Models (LLMs) in a condensed, three-hour format. To deepen your understanding, please review the **Additional Resources** ([here](https://github.com/FennStatistics/introductory-workshop-in-LLMs/tree/main/Additional%20Resources)) and explore some introductory materials before the workshop.
 
 If you’d like to follow along with the code demonstrations, having a basic understanding of Python is essential. While downloading the software in advance is optional, doing so will allow you to run the code on your own device. However, **all code demonstrations will also be discussed conceptually, so you'll be able to engage fully without the software installed**.
 
