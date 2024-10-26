@@ -53,17 +53,6 @@ To follow along with code demonstrations during the workshop, consider installin
 
 You are invited to download the necessary software for this demonstration. Note that this setup requires some familiarity with web development.
 
-
-Here's an improved version of the explanation with clear markdown structure:
-
----
-
-### 2.1 🔧 Software Setup for "Agentic" Retrieval-Augmented Generation (Optional)
-
-> This code will enable automatic scanning and processing of large sets of (scientific) PDFs. **I am likely forming a working group** focused on this topic with the goal of a joint publication in the future.
-
-You are invited to download the necessary software for this demonstration. Note that this setup requires some familiarity with web development.
-
 1. **Set up a Self-Hosted Supabase Server**
    - Follow the instructions [here](https://supabase.com/docs/guides/self-hosting/docker) to install a self-hosted [Supabase](https://supabase.com/) server using Docker.
     - **Windows users**: To run Docker, you must first install the Windows Subsystem for Linux (WSL). Follow the WSL setup guide [here](https://learn.microsoft.com/en-us/windows/wsl/install).
