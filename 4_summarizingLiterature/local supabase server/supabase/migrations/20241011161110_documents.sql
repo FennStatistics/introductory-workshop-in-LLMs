@@ -17,7 +17,7 @@ CREATE TABLE documents_chunks (
   id VARCHAR REFERENCES documents(id) ON DELETE CASCADE, -- id as a foreign key referencing documents
   order_chunks BIGINT,
   section VARCHAR,
-  content TEXT NOT NULL,
+  content VARCHAR NOT NULL, -- Changed from TEXT to VARCHAR
   embedding VECTOR(384),
   created_at TIMESTAMPTZ DEFAULT NOW(),
   PRIMARY KEY (document_id, id) -- Composite primary key combining document_id and id

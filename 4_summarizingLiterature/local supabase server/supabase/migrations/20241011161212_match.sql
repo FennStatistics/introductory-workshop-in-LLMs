@@ -13,9 +13,9 @@ as $$
 #variable_conflict use_variable
 begin
   return query
-  select document_id, content
+  select * -- document_id, content::varchar
   from (
-    select document_id, content
+    select * -- document_id, content
     from documents_chunks
     where documents_chunks.embedding <#> embedding < -match_threshold
     order by documents_chunks.embedding <#> embedding

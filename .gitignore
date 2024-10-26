@@ -25,4 +25,9 @@
 # do not upload any scientific PDFs
 **/PDFs/*.pdf
 **/PDFs/AIregulation/
+**/PDFs/AIregulation_query2/
 **/tmp_downloads/
+
+
+# online study
+**/study interact with LLM/

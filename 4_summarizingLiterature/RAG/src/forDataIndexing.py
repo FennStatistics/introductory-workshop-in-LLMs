@@ -98,7 +98,7 @@ def load_split_embed(supabase_DB, path_to_PDFs, args_Split, LMM):
     chunk_overlap = args_Split.get('chunk_overlap')
     
     arrayPDFs = non_processed_PDFs(supabase_DB=supabase_DB, verbose=False)
-    arrayPDFs = arrayPDFs[:2] # !!!!
+    arrayPDFs = arrayPDFs[:10] # !!!!
     # download all PDFs, which have not been processed
     for pdf in arrayPDFs:
         download_PDF(folderpath=path_to_PDFs, filename=pdf, supabase_DB=supabase_DB)
@@ -130,6 +130,9 @@ def load_split_embed(supabase_DB, path_to_PDFs, args_Split, LMM):
             
             supabase_DB.table('documents_chunks').insert(entry_chunk).execute()
   
+  # remove downloaded pdfs
+  
+
 # The load_pdfs_by_filename function iterates over all PDF files in a specified folder, loads the pages from each PDF using PyPDFLoader, and stores them in a dictionary with the filenames as keys.
 import os
 from langchain_community.document_loaders import PyPDFLoader
