@@ -6,9 +6,11 @@ To get the most out of our workshop on Large Language Models, please complete th
 
 ## 1. 📖 Read in Advance
 
-📢 **Important Note:** This workshop will focus on the fundamentals of Large Language Models (LLMs) within a short, three-hour timeframe. To gain deeper insights, I highly recommend reviewing the **Additional Resources** section prior to the workshop and to read some of the introductory literature. Further, if you want to follow the code demonstrations, it’s crucial to come with a **basic understanding of Python**, which, however is not necessary to follow all the code demonstrations on a conceptual level.
+📢 **Important Note**: This workshop will cover the fundamentals of Large Language Models (LLMs) in a condensed, three-hour format. To deepen your understanding, please review the **Additional Resources** and explore some introductory materials before the workshop.
 
-> During the session, we’ll focus on hands-on learning, showcasing practical and impactful applications of LLMs. I look forward to exploring these use cases with you!
+If you’d like to follow along with the code demonstrations, having a basic understanding of Python is essential. While downloading the software in advance is optional, doing so will allow you to run the code on your own device. However, **all code demonstrations will also be discussed conceptually, so you'll be able to engage fully without the software installed**.
+
+> During the session, we’ll dive into hands-on learning, highlighting practical and impactful uses of LLMs. I look forward to exploring these applications with you!
 
 ---
 
@@ -45,14 +47,46 @@ To follow along with code demonstrations during the workshop, consider installin
       - [GitLens for enhanced Git capabilities](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 
 
-### 2.1 🔧 Software Setup for "agentic" Retrieval Augmented Generation
+### 2.1 🔧🔧 Software Setup for "agentic" Retrieval Augmented Generation (If Desired)
 
-> This code enables you to automatically scan any amout of (scientific) PDFs. I will highly likely form a working group on this topic with the aim of a joint publication. 
+> This code will enable automatic scanning and processing of large sets of (scientific) PDFs. **I am likely forming a working group focused on this topic with the goal of a joint publication in the future**.
 
-You are also invited to download all the necessary software for this code demonstration, however it requieres some understanding of web development.
+You are invited to download the necessary software for this demonstration. Note that this setup requires some familiarity with web development.
 
 
+Here's an improved version of the explanation with clear markdown structure:
 
+---
+
+### 2.1 🔧 Software Setup for "Agentic" Retrieval-Augmented Generation (Optional)
+
+> This code will enable automatic scanning and processing of large sets of (scientific) PDFs. **I am likely forming a working group** focused on this topic with the goal of a joint publication in the future.
+
+You are invited to download the necessary software for this demonstration. Note that this setup requires some familiarity with web development.
+
+1. **Set up a Self-Hosted Supabase Server**
+   - Follow the instructions [here](https://supabase.com/docs/guides/self-hosting/docker) to install a self-hosted [Supabase](https://supabase.com/) server using Docker.
+    - **Windows users**: To run Docker, you must first install the Windows Subsystem for Linux (WSL). Follow the WSL setup guide [here](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+2. **Process PDFs with GROBID**
+   - To extract, parse, and reformat scientific PDFs, this setup uses the machine learning library **GeneRation Of BIbliographic Data (GROBID)**. This tool converts PDFs into structured XML documents and can be hosted locally via Docker. Installation instructions can be found [here](https://grobid.readthedocs.io/en/latest/Grobid-docker/#grobid-and-docker-containers).
+
+3. **Run the Servers**
+   - After installing Docker (and WSL if required), and GROBID, follow these steps to start the services:
+     - **Start the local Supabase server**:
+       - Open the "local supabase server" folder within the "5_summarizingLiterature" directory in VS Code.
+       - In the terminal, enter:  
+         ```bash
+         npx supabase start
+         ```
+     - **Start the GROBID server**:
+       - In the terminal, enter:  
+         ```bash
+         docker run --gpus all --init --ulimit core=0 -p 8070:8070 grobid/grobid:0.8.1
+         ```
+
+This setup will enable you to explore advanced Retrieval-Augmented Generation locally on your computer.
+   
 
 ---
 
