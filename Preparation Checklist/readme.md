@@ -67,7 +67,7 @@ To follow along with code demonstrations during the workshop, consider installin
 
 > This code will enable automatic scanning and processing of large sets of (scientific) PDFs. **I am likely forming a working group focused on this topic with the goal of a joint publication in the future**.
 
-You are invited to download the necessary software for this demonstration. Note that this setup requires some familiarity with web development.
+You are invited to download the necessary software for this demonstration. Note that this setup requires some familiarity with software development (like containers).
 
 1. **Set up a Self-Hosted Supabase Server**
    - Follow the instructions [here](https://supabase.com/docs/guides/self-hosting/docker) to install a self-hosted [Supabase](https://supabase.com/) server using Docker.
