@@ -46,5 +46,5 @@ I’m here to help! If you have any questions, suggestions or would like to disc
       + Enhance your summarization by coupling it with **bibliometric analysis** to better understand academic research trends.
 
 6. **Appendix**
-   - Discover advanced functionalities like **Text-to-Speech** and **Speech-to-Text** for converting text to audio and vice sersa.
+   - Discover advanced functionalities like **Text-to-Speech** and **Speech-to-Text** for converting text to audio and vice versa.
    - Explore **model fine-tuning techniques** to tailor LLMs for specialized applications and improved performance in specific tasks.
