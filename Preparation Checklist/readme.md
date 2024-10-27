@@ -28,6 +28,10 @@ The Inference API of Hugging Face offers access to models with significant commu
 > **Remark**: Llama models operate under the **META LLAMA 3 COMMUNITY LICENSE AGREEMENT**, which grants a non-exclusive, royalty-free license for users to utilize, modify, and distribute the Llama 3 materials. This license includes requirements for attribution and naming conventions in derivative works. Note that users with over 700 million monthly active users must obtain a separate license. Meta disclaims all warranties and limits liability for the materials’ use.
 
 
+**Store your keys**: In this project, **API keys are securely stored in the file `API_key.py` within the `src` (source) folder of the repository**. A template file, `API_key_adjust.py`, has been provided; to set up your API keys, copy and paste them into this file and rename it to `API_key.py`. To ensure security, avoid uploading this file to the internet, as such the `.gitignore` file is configured to prevent accidental sharing of sensitive data.
+
+You can also create an OpenAI key, e.g., to run my replicate example, see (you pay for usage and not monthly): https://platform.openai.com/api-keys
+
 ---
 
 ## 2. 🔧 Software Setup (If Desired)
