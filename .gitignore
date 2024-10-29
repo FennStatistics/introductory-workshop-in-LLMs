@@ -1,5 +1,6 @@
 # avoid uploading sensitive information
 **/api_key.py
+**/API_key.py
 **/__pycache__/
 
 # Distribution / packaging
