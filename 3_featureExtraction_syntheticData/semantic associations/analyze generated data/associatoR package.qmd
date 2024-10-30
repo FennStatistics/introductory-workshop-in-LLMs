@@ -424,3 +424,15 @@ ar_plot_wordcloud(
 
 
 
+
+
+```{r}
+dat <- ar_import(intelligence,
+          participant = participant_id,
+          cue = cue,
+          response = response,
+          participant_vars = c(gender, education),
+          response_vars = c(response_position, response_level))
+```
+
+
