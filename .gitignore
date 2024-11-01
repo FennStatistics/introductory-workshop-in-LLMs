@@ -32,3 +32,8 @@
 
 # online study
 **/study interact with LLM/
+
+
+# avoid pushing files of fine tuned model:
+**/finetuned-dataset/
+**/tmp_trainer/

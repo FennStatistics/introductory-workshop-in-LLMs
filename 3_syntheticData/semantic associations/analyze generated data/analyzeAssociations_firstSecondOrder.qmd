@@ -85,7 +85,6 @@ function to create semantic networks (! without checking if all the edges are "t
 generate_association_network <- function(cue_word, data_set, distance = 2) {
   # Filter the dataset based on the cue word
   tmp <- data_set[data_set$cue == cue_word, ]
-  
   # print number of times a response was given:
   print("number of times a response was given")
   print(sort(table(tmp$response)))
@@ -140,6 +139,36 @@ generate_association_network <- function(cue_word, data_set, distance = 2) {
   return(g)
 }
 ```
+
+
+## for our individual person
+
+```{r}
+tmp_person <- associationData[associationData$participant_id == "0_1",]
+
+# Create edges based on the response level
+edges_level_1 <- tmp_person %>%
+  filter(response_level == 1) %>%
+  select(cue, response)
+
+edges_level_2 <- tmp_person %>%
+  filter(response_level == 2) %>%
+  select(cue, response)
+
+# Combine edges into one data frame
+edges <- rbind(
+  edges_level_1,
+  edges_level_2
+)
+
+# Create an igraph object
+g <- graph_from_data_frame(edges, directed = TRUE)
+
+# Plot the graph
+plot(g, vertex.label.cex = 0.8, vertex.size = 15, edge.arrow.size = 0.5,
+     main = "Semantic Network")
+```
+
 
 
 ## for our central cue "underweight"
