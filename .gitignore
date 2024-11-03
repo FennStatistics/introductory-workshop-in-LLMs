@@ -27,6 +27,7 @@
 **/PDFs/*.pdf
 **/PDFs/AIregulation/
 **/PDFs/AIregulation_query2/
+**/PDFs/livmats/
 **/tmp_downloads/
 
 
@@ -37,3 +38,5 @@
 # avoid pushing files of fine tuned model:
 **/finetuned-dataset/
 **/tmp_trainer/
+
+**/zz_backups/
