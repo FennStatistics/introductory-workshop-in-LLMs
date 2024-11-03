@@ -1,7 +1,14 @@
-# 
 import os
-from langchain_community.document_loaders import PyPDFLoader
 import warnings
+import re
+import unicodedata
+
+def sanitize_filename(filename):
+    # Normalize Unicode characters to their closest ASCII representation
+    filename = unicodedata.normalize('NFKD', filename).encode('ascii', 'ignore').decode('ascii')
+    # Replace spaces and unsupported characters with underscores
+    filename = re.sub(r'[^\w\-.]', '_', filename)
+    return filename
 
 def upload_PDFs(folder_path, supabase_DB, args_Search, verbose=False):
     # Check if 'topic' and 'subtopic' are provided in args_Search
@@ -24,37 +31,45 @@ def upload_PDFs(folder_path, supabase_DB, args_Search, verbose=False):
     for filename in os.listdir(folder_path):
         # Check if the file is a PDF and is not in the excluded list
         if filename.endswith(".pdf") and filename not in alreadyUploaded:
-            counter = counter + 1
+            # Sanitize the filename for upload
+            sanitized_filename = sanitize_filename(filename)
+            
+            counter += 1
             
             if verbose:
-                print(f"Upload PDF: {filename}")
+                print(f"Upload PDF: {sanitized_filename}")
             
             # Upload PDFs:
-            #> changing path argument to "path="AI/10.1002_sd.2048.pdf" would create a subfolder called "AI" in your storage
-            with open(folder_path + filename, 'rb') as f:
-                supabase_DB.storage.from_("files").upload(file=f,path=filename, file_options={"content-type": "pdf"})
+            try:
+                with open(os.path.join(folder_path, filename), 'rb') as f:
+                    supabase_DB.storage.from_("files").upload(file=f, path=sanitized_filename, file_options={"content-type": "application/pdf"})
                 
-            # Use PyPDFLoader to load PDF and get metadata
-            pdf_path = os.path.join(folder_path, filename)
-            loader = PyPDFLoader(pdf_path)
-            doc = loader.load()
-            num_pages = len(doc)  # This will give the number of pages in the PDF
-            
-            # Add entry to DB:  
-                        # Add entry to DB with the number of pages
-            entry_PDF = {
-                'id': filename,
-                'topic': topic,
-                'subtopic': subtopic,
-                'num_pages': num_pages
-            }
-            supabase_DB.table('documents').insert(entry_PDF).execute()
+                # Use PyPDFLoader to load PDF and get metadata
+                pdf_path = os.path.join(folder_path, filename)
+                loader = PyPDFLoader(pdf_path)
+                try:
+                    doc = loader.load()
+                    num_pages = len(doc)  # This will give the number of pages in the PDF
+                except Exception as e:
+                    print(f"Error parsing PDF '{filename}': {e}")
+                    continue  # Skip to the next file if parsing fails
+                
+                # Add entry to DB:
+                entry_PDF = {
+                    'id': sanitized_filename,
+                    'topic': topic,
+                    'subtopic': subtopic,
+                    'num_pages': num_pages
+                }
+                supabase_DB.table('documents').insert(entry_PDF).execute()
+
+            except Exception as e:
+                print(f"Failed to upload or process PDF '{filename}': {e}")
+                continue
 
         else:
             print(f'The following file: "{filename}" is a) not a PDF or b) was already uploaded in the DB.')
-    print(f"In total {counter} PDFs were sucessfully uploaded to your DB.")
-
-
+    print(f"In total {counter} PDFs were successfully uploaded to your DB.")
 
 
 
