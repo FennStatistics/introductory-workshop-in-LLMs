@@ -39,4 +39,8 @@
 **/finetuned-dataset/
 **/tmp_trainer/
 
+
+# just collecting files for future workshops:
 **/zz_backups/
+**/zz_ownCode/
+**/zz_futureMaterials/
