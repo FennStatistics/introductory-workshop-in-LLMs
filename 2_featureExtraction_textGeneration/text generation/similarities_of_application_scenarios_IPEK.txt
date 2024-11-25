@@ -1,0 +1,11 @@
+**Similarities Across Application Scenarios:**
+
+*   **Immersive Feedback**: All scenarios utilize the VR headset to provide an immersive simulated environment, enhancing user engagement and interaction.
+*   **Ergonomic Hand Grip and Force Sensor**: Each scenario employs the ergonomic hand grip equipped with a force sensor, allowing participants to interact with virtual objects and providing real-time force exertion data.
+*   **6D Shaker and Robotic Arm**: The 6D shaker attached to the robotic arm is used in all scenarios to provide precise motion and force application, simulating real-world assembly tasks and physical constraints.
+*   **Vicon Motion Tracking**: The Vicon motion tracking system is used in all scenarios to capture participant movements and robotic arm motion, enabling detailed analysis of interaction dynamics.
+*   **Within-Subjects Design**: Most scenarios employ a within-subjects design, where participants perform tasks under multiple conditions, allowing for comparisons and analysis of individual performance and preferences.
+*   **Force Feedback and Haptic Cues**: Force feedback and haptic cues are used in all scenarios to simulate physical constraints and provide realistic feedback, influencing participant performance, comfort, and perception.
+*   **Assembly Tasks and Virtual Environments**: All scenarios involve assembly tasks within virtual environments, allowing researchers to investigate various aspects of human-robot interaction, such as user comfort, fatigue, movement efficiency, and trust.
+*   **Experimental Conditions and Variables**: Multiple conditions and variables are tested in each scenario, including levels of force feedback, task complexity, robot responsiveness, and cognitive demands, to analyze their impact on participant performance and interaction dynamics.
+*   **Data Analysis and Insights**: Data collected from the HRI system is analyzed to gain insights into human-robot interaction, informing the optimization of tool design, virtual assembly training, and robotic system development.
