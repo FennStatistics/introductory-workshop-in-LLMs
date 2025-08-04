@@ -44,3 +44,6 @@
 **/zz_backups/
 **/zz_ownCode/
 **/zz_futureMaterials/
+
+# internal files
+**/zz_internal/
